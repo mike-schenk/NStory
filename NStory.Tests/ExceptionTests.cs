@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NStory.Framework;
 using NUnit.Framework;
-using ProCoder.Library.Tests;
 
 namespace NStory.Tests
 {
@@ -35,18 +35,29 @@ namespace NStory.Tests
 			
 		}
 
+		IScenarioStep subject;
+		private Exception exception;
+
 		public void ASimpleScenario()
 		{
-			var s = Scenario.Given(() => { });
+			subject = Scenario.Given(() => { });
 		}
+
 		public void TheScenarioExecutesAndNoExceptionsAreThrown()
 		{
-			
+			try
+			{
+				subject.Execute();
+			}
+			catch (Exception e)
+			{
+				exception = e;
+			}
 		}
 
 		public void NoExceptionsAreReported()
 		{
-			
+			Assert.That(exception, Is.Null);
 		}
 	}
 }
