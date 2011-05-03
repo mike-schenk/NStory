@@ -1,0 +1,14 @@
+Enables unit tests to be written like so:
+
+[Test]
+public void GivenASearch_WhenItCompletes()
+{
+  Scenario
+    .Given(ASearchResultsStateObjectThatIsSearching)
+    .Then(UserInterfaceShowsBusyIndicator)
+    .When(SearchCompletes)
+    .Then(UserInterfaceDoesNotShowBusyIndicator)
+    .And(TotalResultCountIs, 600)
+    .And(IncludedResultCountIs, 500)
+    .Execute();
+}
